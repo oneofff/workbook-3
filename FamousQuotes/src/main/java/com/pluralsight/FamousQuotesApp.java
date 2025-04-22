@@ -2,7 +2,7 @@ package com.pluralsight;
 
 import java.util.Scanner;
 
-public class Main {
+public class FamousQuotesApp {
     private static final String[] QUOTES = {
             "The only limit to our realization of tomorrow is our doubts of today.",
             "The future belongs to those who believe in the beauty of their dreams.",
@@ -39,13 +39,13 @@ public class Main {
                 System.out.println("Please enter a number between 1 and 10");
             } catch (Exception exception) {
                 System.out.println("An error occurred: " + exception.getMessage());
-                scanner.nextLine(); // Clear the scanner buffer
+                scanner.nextLine();
             }
         }
     }
 
     private static void printRandomQuote() {
-        int index = (int) (Math.random() * Main.QUOTES.length) + 1; // Generate a random index
-        System.out.println("Your random quote is: " + Main.QUOTES[index - 1]);
+        int index = (int) (Math.random() * QUOTES.length) + 1;
+        System.out.println("Your random quote is: " + QUOTES[index - 1]);
     }
 }
