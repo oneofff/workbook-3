@@ -1,8 +1,8 @@
-package com.pluralsight;
+package com.pluralsight.utils;
 
 import java.io.*;
 
-public class FileReaderUtils {
+public class FileReaderUtils implements AutoCloseable {
     private final BufferedReader bufferedReader;
 
     public FileReaderUtils(String file) {
@@ -13,6 +13,15 @@ public class FileReaderUtils {
     public String readLine(){
         try {
             return bufferedReader.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void close(){
+        try {
+            bufferedReader.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

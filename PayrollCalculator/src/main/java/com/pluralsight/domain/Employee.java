@@ -1,8 +1,7 @@
-package com.pluralsight;
+package com.pluralsight.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @NoArgsConstructor
@@ -22,6 +21,12 @@ public class Employee {
 
     public double getGrossPay() {
         return hoursWorked * payRate;
+    }
+
+    public String getCsvLine() {
+        return this.employeeId + "|" +
+                this.name + "|"
+                + getGrossPay() + "\n";
     }
 
     @Override
