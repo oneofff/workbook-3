@@ -1,0 +1,33 @@
+package com.pluralsight;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data
+@NoArgsConstructor
+public class Employee {
+    private int employeeId;
+    private String name;
+    private double hoursWorked;
+    private double payRate;
+
+    public Employee(String csvLine) {
+        String[] parts = csvLine.split("\\|");
+        this.employeeId = Integer.parseInt(parts[0]);
+        this.name = parts[1];
+        this.hoursWorked = Double.parseDouble(parts[2]);
+        this.payRate = Double.parseDouble(parts[3]);
+    }
+
+    public double getGrossPay() {
+        return hoursWorked * payRate;
+    }
+
+    @Override
+    public String toString() {
+        // PRINT HUANM READABLE
+        return String.format("Employee ID: %d, Name: %s, Hours Worked: %.2f, Pay Rate: %.2f, Gross Pay: %.2f",
+                employeeId, name, hoursWorked, payRate, getGrossPay());
+    }
+}
