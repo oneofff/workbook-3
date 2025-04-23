@@ -34,4 +34,9 @@ public class Employee {
         return String.format("Employee ID: %d, Name: %s, Hours Worked: %.2f, Pay Rate: %.2f, Gross Pay: %.2f",
                 employeeId, name, hoursWorked, payRate, getGrossPay());
     }
+
+    public String toJsonLine() {
+        return String.format("{\"employeeId\": %d, \"name\": \"%s\", \"hoursWorked\": %.2f, \"payRate\": %.2f, \"grossPay\": %.2f}",
+                employeeId, name, hoursWorked, payRate, getGrossPay());
+    }
 }

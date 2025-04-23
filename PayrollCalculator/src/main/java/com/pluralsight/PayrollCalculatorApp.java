@@ -12,13 +12,30 @@ public class PayrollCalculatorApp {
     private static final String EMPLOYEES_SOURCE = "employees.csv";
     private static final String EMPLOYEES_DESTINATION = "employees_gross_pay.cvs";
     private static final String PATH_OF_DESTINATION = "output/";
-
+    private static final String EMPLOYEES_DESTINATION_JSON = "employees_gross_pay.json";
 
     public static void main(String[] args) {
         FileReaderUtils fileReaderUtils = new FileReaderUtils(PATH_OF_SOURCE + EMPLOYEES_SOURCE);
         List<Employee> employeeList = getEmployeeList(fileReaderUtils);
         printEmployeeList(employeeList);
         writeEmployeeListInCvsFile(employeeList);
+        writeEmployeeListInJsonFile(employeeList);
+    }
+
+    private static void writeEmployeeListInJsonFile(List<Employee> employeeList) {
+        try (FileWriterUtils fileWriterUtils = new FileWriterUtils(PATH_OF_DESTINATION + EMPLOYEES_DESTINATION_JSON)) {
+            fileWriterUtils.writeLine("[\n");
+            int i = 0;
+            for (var e : employeeList) {
+                fileWriterUtils.writeLine(e.toJsonLine());
+                if (i < employeeList.size() - 1) {
+                    fileWriterUtils.writeLine(",\n");
+                }
+                i++;
+            }
+            fileWriterUtils.writeLine("\n]");
+            System.out.printf("Json file successfully created, %d rows.\n", i);
+        }
     }
 
     private static List<Employee> getEmployeeList(FileReaderUtils fileReaderUtils) {
@@ -49,7 +66,7 @@ public class PayrollCalculatorApp {
                 fileWriterUtils.writeLine(e.getCsvLine());
                 i++;
             }
-            System.out.printf("File successfully created, %d rows.\n", i);
+            System.out.printf("CSV file successfully created, %d rows.\n", i);
         }
     }
 
