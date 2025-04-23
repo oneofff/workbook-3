@@ -26,7 +26,6 @@ public class Employee {
 
     @Override
     public String toString() {
-        // PRINT HUANM READABLE
         return String.format("Employee ID: %d, Name: %s, Hours Worked: %.2f, Pay Rate: %.2f, Gross Pay: %.2f",
                 employeeId, name, hoursWorked, payRate, getGrossPay());
     }
